@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# double_bladed_axe
+#DoubleBladedAxe：一个在list头部和尾部加载item的flutter组件
 
 A new Flutter project.
 
@@ -16,6 +16,3 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 =======
-# DoubleBladedAxe
-a flutter widget.
->>>>>>> 43291323854941596d3b984670cea7e1136edfda
