@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-#DoubleBladedAxe：一个在list头部和尾部加载item的flutter组件
+# DoubleBladedAxe：一个在list头部和尾部加载item的flutter组件
 
 A new Flutter project.
 
