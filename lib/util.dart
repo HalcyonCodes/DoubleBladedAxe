@@ -1,7 +1,7 @@
-import 'status_util.dart';
+import './components/util/status_util.dart';
 import 'package:flutter/material.dart';
 
-class LessonListUtil {
+class ListUtil {
   //播放加载下一个状态指示器的动画
   Future<void> Function(Function())? _startLoadMoreStatusCardAnimate;
   Future<void> Function(Function())? get startLoadMoreStatusCardAniamte =>

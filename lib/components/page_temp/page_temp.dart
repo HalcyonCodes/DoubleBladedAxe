@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../util/util.dart';
+import '../../util.dart';
 
 
 //在singleChildScrollView里创建过度的列表以便于计算页面的坐标，计算完成后切换成ListItem;
 class PageTemp extends StatefulWidget {
   final List<Widget> pageWidgets;
-  final LessonListUtil lessonListUtil;
-  const PageTemp({super.key ,required this.pageWidgets, required this.lessonListUtil});
+  final ListUtil listUtil;
+  const PageTemp({super.key ,required this.pageWidgets, required this.listUtil});
 
   @override
   State<PageTemp> createState() => _PageTempState();
@@ -19,7 +19,7 @@ class _PageTempState extends State<PageTemp> {
   void initState() {
     super.initState();
     globalKey = GlobalKey();
-    widget.lessonListUtil.setFuncGetSinglePageHeight(getSinglePageHeight);
+    widget.listUtil.setFuncGetSinglePageHeight(getSinglePageHeight);
   }
 
   @override

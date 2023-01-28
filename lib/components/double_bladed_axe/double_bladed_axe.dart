@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../util/util.dart';
+import '../../util.dart';
 import '../function_list/function_list.dart';
 import '../status_card/user_loadmore_widget.dart';
 import '../status_card/user_loadpre_widget.dart';
@@ -11,7 +11,7 @@ class DoubleBladedAxe extends StatefulWidget {
   final String initPage;
   final String maxPage;
   final String pageMaxContainCount;
-  final LessonListUtil lessonListUtil;
+  final ListUtil listUtil;
   const DoubleBladedAxe({
     super.key,
     this.loadMoreStatusWidget,
@@ -20,7 +20,7 @@ class DoubleBladedAxe extends StatefulWidget {
     required this.initPage,
     required this.maxPage,
     required this.pageMaxContainCount,
-    required this.lessonListUtil,
+    required this.listUtil,
   });
   @override
   State<DoubleBladedAxe> createState() => _DoubleBladedAxeState();
@@ -31,13 +31,13 @@ class _DoubleBladedAxeState extends State<DoubleBladedAxe> {
   Widget build(BuildContext context) {
     return FunctionList(
         initListItems: widget.initWidgets,
-        lessonListUtil: widget.lessonListUtil,
+        listUtil: widget.listUtil,
         initPage: widget.initPage,
         maxPage: widget.maxPage,
         pageMaxContainCount: widget.pageMaxContainCount,
         loadMoreStatusWidget: widget.loadMoreStatusWidget ??
-            UserLoadMoreWidget(lessonListUtil: widget.lessonListUtil),
+            UserLoadMoreWidget(listUtil: widget.listUtil),
         loadPreStatusWidget: widget.loadPreStatusWidget ??
-            UserLoadPreWidget(lessonListUtil: widget.lessonListUtil));
+            UserLoadPreWidget(listUtil: widget.listUtil));
   }
 }

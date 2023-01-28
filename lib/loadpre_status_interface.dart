@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'loadpre_animated_status_card.dart';
-import '../util/util.dart';
+import '/util.dart';
 
 //包装加载上一个的加载指示器动画
 class LoadPreStatusInterface extends StatefulWidget {
-  final LessonListUtil lessonListUtil;
+  final ListUtil listUtil;
   final AnimationController animationController;
   final Widget widget;
   const LoadPreStatusInterface(
       {super.key,
-      required this.lessonListUtil,
+      required this.listUtil,
       required this.animationController,
       required this.widget});
 
@@ -26,8 +25,8 @@ class _LoadPreStatusInterfaceState extends State<LoadPreStatusInterface>
     super.initState();
     //animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 600));
     animationController = widget.animationController;
-    widget.lessonListUtil.setStartLoadPreStatusCardAnimate(startAnimate);
-    widget.lessonListUtil.setReseverLoadPreStatusCardAnimate(reverseAnimate);
+    widget.listUtil.setStartLoadPreStatusCardAnimate(startAnimate);
+    widget.listUtil.setReseverLoadPreStatusCardAnimate(reverseAnimate);
   }
 
   @override

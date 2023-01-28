@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'loadmore_status_interface.dart';
-import 'loadmore_animated_status_card.dart';
-import '../util/util.dart';
+import '../../loadmore_status_interface.dart';
+import './loadmore_animated_status_card.dart';
+import '../../util.dart';
 
 class UserLoadMoreWidget extends StatefulWidget {
-  final LessonListUtil lessonListUtil;
-  const UserLoadMoreWidget({super.key, required this.lessonListUtil});
+  final ListUtil listUtil;
+  const UserLoadMoreWidget({super.key, required this.listUtil});
 
   @override
   State<UserLoadMoreWidget> createState() => _UserLoadMoreWidgetState();
@@ -25,7 +25,7 @@ class _UserLoadMoreWidgetState extends State<UserLoadMoreWidget>
   @override
   Widget build(BuildContext context) {
     return LoadMoreStatusInterface(
-        lessonListUtil: widget.lessonListUtil,
+        listUtil: widget.listUtil,
         animationController: animationController,
         widget: LoadMoreAnimatedStatusCard(
             animationController: animationController,
@@ -34,6 +34,6 @@ class _UserLoadMoreWidgetState extends State<UserLoadMoreWidget>
                     parent: animationController,
                     curve: const Interval((1 / 3) * 0, 1.0,
                         curve: Curves.fastOutSlowIn))),
-            statusString: widget.lessonListUtil.statusText));
+            statusString: widget.listUtil.statusText));
   }
 }

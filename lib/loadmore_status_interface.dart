@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import '../util/util.dart';
-import 'loadmore_animated_status_card.dart';
+import 'util.dart';
+import 'components/status_card/loadmore_animated_status_card.dart';
 
 //封装加载更多的指示器动画
 class LoadMoreStatusInterface extends StatefulWidget {
-  final LessonListUtil lessonListUtil;
+  final ListUtil listUtil;
   final AnimationController animationController;
   final Widget widget;
   const LoadMoreStatusInterface(
       {super.key,
-      required this.lessonListUtil,
+      required this.listUtil,
       required this.animationController,
       required this.widget});
 
@@ -27,8 +27,8 @@ class _LoadMoreStatusInterfaceState
   void initState() {
     super.initState();
     animationController = widget.animationController;
-    widget.lessonListUtil.setStartLoadMoreStatusCardAnimate(startAnimate);
-    widget.lessonListUtil.setReverseLoadMoreStatusCardAnimate(reverseAnimate);
+    widget.listUtil.setStartLoadMoreStatusCardAnimate(startAnimate);
+    widget.listUtil.setReverseLoadMoreStatusCardAnimate(reverseAnimate);
   }
 
   @override

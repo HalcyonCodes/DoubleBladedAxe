@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../double_bladed_axe/double_bladed_axe.dart';
-import '../util/util.dart';
+import '../../util.dart';
 
 //用于http请求和包装好生成的组件列表，这个组件将由用户创建
 class UserList extends StatefulWidget {
-  final LessonListUtil lessonListUtil;
+  final ListUtil lessonListUtil;
   final double height;
   final String initPage;
   final String pageMaxContainCount;
@@ -49,7 +49,7 @@ class _UserListState extends State<UserList> {
       initPage: widget.initPage,
       maxPage: widget.maxPage,
       pageMaxContainCount: widget.pageMaxContainCount,
-      lessonListUtil: widget.lessonListUtil,
+      listUtil: widget.lessonListUtil,
     );
   }
 

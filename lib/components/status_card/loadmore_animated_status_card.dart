@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'status_card.dart';
+import './status_card.dart';
 
 class LoadMoreAnimatedStatusCard extends StatefulWidget {
   final String statusString;
