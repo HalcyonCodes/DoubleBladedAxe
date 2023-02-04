@@ -53,8 +53,11 @@ class _FunctionListState extends State<FunctionList> {
         .setFuncMaintainScrollCtrlInLoadMoreInFunctionList(maintainScrollCtrl);
     widget.listUtil.setFuncSelectPageInFunctionList(selectPage);
     widget.listUtil.setFuncGetCurrentPageInFunctionList(getCurrentPage);
+    widget.listUtil.setFuncGetMaxPageInFunctionList(getMaxPage);
     widget.listUtil.setFuncSetIsLockLoadPre(selectIsLoadPre);
     widget.listUtil.setFuncSetIsLockLoadMore(selectIsLoadMore);
+    widget.listUtil.setFuncGetPageStartIndex(getPageStartIndex);
+    widget.listUtil.setFuncGetPageEndIndex(getPageEndIndex);
     //初始化
     pageStartIndex = int.tryParse(widget.initPage)!;
     pageEndIndex = pageStartIndex;
@@ -209,6 +212,11 @@ class _FunctionListState extends State<FunctionList> {
     return currentPage;
   }
 
+  //得到最大页页码
+  int getMaxPage() {
+    return maxPage;
+  }
+
   //计算位于哪一页
   void selectPage() {
     double currentPosition = widget.listUtil.scrollController!.position.pixels;
@@ -249,5 +257,15 @@ class _FunctionListState extends State<FunctionList> {
   void initIsLockedLoad() {
     selectIsLoadMore();
     selectIsLoadPre();
+  }
+
+  //获得最前一页的页码
+  int getPageStartIndex() {
+    return pageStartIndex;
+  }
+
+  //获得最后一页的页码
+  int getPageEndIndex() {
+    return pageEndIndex;
   }
 }

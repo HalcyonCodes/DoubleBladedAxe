@@ -248,12 +248,19 @@ class ListUtil {
     _rebuildScrollCtrlLoadMoreAfterInSwitchList = func;
   }
 
-  //FunctionList中的当前页面
+  //获得FunctionList中的当前页码
   int Function()? _getCurrentPageInFunctionList;
   int Function()? get getCurrentPageInFunctionList =>
       _getCurrentPageInFunctionList;
   void setFuncGetCurrentPageInFunctionList(int Function()? func) {
     _getCurrentPageInFunctionList = func;
+  }
+
+  //获得FunctionList中的最大页码
+  int Function()? _getMaxPageInFunctionList;
+  int Function()? get getMaxPageInFunctionList => _getMaxPageInFunctionList;
+  void setFuncGetMaxPageInFunctionList(int Function()? func) {
+    _getMaxPageInFunctionList = func;
   }
 
   //functionList中计算当前页面的方法
@@ -289,5 +296,26 @@ class ListUtil {
   void Function()? get selectIsLockLoadMore => _selectIsLockLoadMore;
   void setFuncSetIsLockLoadMore(void Function()? func) {
     _selectIsLockLoadMore = func;
+  }
+
+  //functionList中获得头部起始页页码
+  int Function()? _getPageStartIndex;
+  int Function()? get getPageStartIndex => _getPageStartIndex;
+  void setFuncGetPageStartIndex(int Function()? func) {
+    _getPageStartIndex = func;
+  }
+
+  //functionList中获得尾部页页码
+  int Function()? _getPageEndIndex;
+  int Function()? get getPageEndIndex => _getPageEndIndex;
+  void setFuncGetPageEndIndex(int Function()? func) {
+    _getPageEndIndex = func;
+  }
+
+  //页码指示器等外部组件在滚动条监听中运行的方法接口
+  void Function()? _scrollListenerFunc;
+  void Function()? get scrollListenerFunc => _scrollListenerFunc;
+  void setFuncScrollListenerFunc(void Function()? func) {
+    _scrollListenerFunc = func;
   }
 }

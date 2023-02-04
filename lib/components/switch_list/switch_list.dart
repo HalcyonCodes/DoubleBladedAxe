@@ -48,9 +48,8 @@ class _SwitchListState<T> extends State<SwitchList> {
         removeSingleChildScrollViewItemOnFoot);
     widget.listUtil.setFuncRemoveSingleChildScrollViewOnHeadInSwitchList(
         removeSingleChildScrollViewItemOnHead);
-    widget.listUtil
-        .setFuncRebuildScrollCrtlLoadMoreMaintainItemsInSwitchList(
-            rebuildScrollCrtlLoadMoreMaintainItems);
+    widget.listUtil.setFuncRebuildScrollCrtlLoadMoreMaintainItemsInSwitchList(
+        rebuildScrollCrtlLoadMoreMaintainItems);
     widget.listUtil.setFuncScrollListenerInSwitchList(scrollListener);
     widget.listUtil.setFuncRebuildScrollCtrlLoadMoreAfterInSwitchList(
         rebuildScrollCrtlLoadMoreAfter);
@@ -68,6 +67,7 @@ class _SwitchListState<T> extends State<SwitchList> {
     addSingleChildScrollViewItemOnFoot(
         singleChildScrollViewItemTemp!); //添加到SingleChildScrollViewItem列表里，用于切换显示然后计算长度
     addListViewItemOnFoot(singleChildScrollViewItemTemp!); //初始化列表元件
+    widget.listUtil.setStatus(Status.statusIdel);
   }
 
   @override
@@ -189,6 +189,7 @@ class _SwitchListState<T> extends State<SwitchList> {
   //监控滚动条
   void scrollListener() {
     scrollController.addListener(() async {
+      //判断锁定
       if (widget.listUtil.status == Status.statusIdel) {
         widget.listUtil.selectIsLockLoadMore!();
         widget.listUtil.selectIsLockLoadPre!();
@@ -198,6 +199,14 @@ class _SwitchListState<T> extends State<SwitchList> {
       if (widget.listUtil.status == Status.statusIdel) {
         widget.listUtil.selectPageInFunctionList!();
       }
+
+      //运行外部元件方法接口
+      if (widget.listUtil.status == Status.statusIdel) {
+        if (widget.listUtil.scrollListenerFunc != null) {
+          widget.listUtil.scrollListenerFunc!();
+        } else {}
+      }
+
       //判断加载上一页和加载下一页
       if (widget.listUtil.status == Status.statusIdel) {
         //滚动条的最大值超过页面的高度
@@ -211,8 +220,7 @@ class _SwitchListState<T> extends State<SwitchList> {
                 (!isLockedLoadPre)) {
               widgetsTemp = [];
               singleChildScrollViewItemTemp = null;
-              widget.listUtil
-                  .setStatus(Status.statusHeadLoading); //设置状态为非空闲
+              widget.listUtil.setStatus(Status.statusHeadLoading); //设置状态为非空闲
               //double originPixel = scrollController.position.maxScrollExtent; //获得没有添加进度指示器时的高度
               setIsListView(true);
               addLoadPreStatusCardOnHead(); //在头部添加加载指示器
@@ -225,18 +233,15 @@ class _SwitchListState<T> extends State<SwitchList> {
                     widgetsTemp = await widget
                         .listUtil.getLoadPreWidgets!(); //http请求并组装组件
                     //反向播放动画
-                    await widget
-                        .listUtil.reversetLoadPreStatusCardAniamte!(() {
+                    await widget.listUtil.reversetLoadPreStatusCardAniamte!(() {
                       //修改加载指示器
                       Widget loadCard = widget.loadPreStatusWidget;
                       Widget loadTemp = LoadTemp(
-                          loadWidget: loadCard,
-                          listUtil: widget.listUtil);
+                          loadWidget: loadCard, listUtil: widget.listUtil);
                       //在singlechildscrollview的Item头部添加指示器
                       addSingleChildScrollViewItemOnHead(loadTemp);
                       singleChildScrollViewItemTemp = PageTemp(
-                          pageWidgets: widgetsTemp,
-                          listUtil: widget.listUtil);
+                          pageWidgets: widgetsTemp, listUtil: widget.listUtil);
                       addSingleChildScrollViewItemOnFoot(
                           singleChildScrollViewItemTemp!);
                       setIsListView(false); //切换成singlechild
@@ -265,8 +270,7 @@ class _SwitchListState<T> extends State<SwitchList> {
                         //====计算并维护卡片队列===
                         widget.listUtil
                             .getCurrentPageHeightInFunctionList!(pageHeight);
-                        widget.listUtil
-                            .maintainItemsInLoadPreInFunctionList!();
+                        widget.listUtil.maintainItemsInLoadPreInFunctionList!();
                         widget.listUtil.insertHeightPageInFunctionList!();
                         //打印调试
                         //widget.lessonListUtil.testSingDisplayInFunctionList!();
@@ -284,8 +288,8 @@ class _SwitchListState<T> extends State<SwitchList> {
                         .setStatus(Status.statusFootLoadFaild); //设置状态
                     singleChildScrollViewItemTemp = null; //
                     widgetsTemp = [];
-                    await widget
-                        .listUtil.reversetLoadMoreStatusCardAniamte!(() {
+                    await widget.listUtil.reversetLoadMoreStatusCardAniamte!(
+                        () {
                       removeLoadMoreStatusCardOnFoot();
                       rebuildScrollCrtlLoadMoreAfter();
                       setIsListView(true);
@@ -304,8 +308,7 @@ class _SwitchListState<T> extends State<SwitchList> {
                 (!isLockedLoadMore)) {
               widgetsTemp = [];
               singleChildScrollViewItemTemp = null;
-              widget.listUtil
-                  .setStatus(Status.statusFootLoading); //设置状态为非空闲
+              widget.listUtil.setStatus(Status.statusFootLoading); //设置状态为非空闲
               setIsListView(true); //切换到
               addLoadMoreStatusCardOnFoot(); //在尾部添加加载指示器
               rebuildScrollCrtlLoadMoreBefore(); //从新构建滚scrollController
@@ -316,13 +319,12 @@ class _SwitchListState<T> extends State<SwitchList> {
                     widgetsTemp = await widget
                         .listUtil.getLoadMoreWidgets!(); //http请求并组装组件
                     //反向播放动画
-                    await widget
-                        .listUtil.reversetLoadMoreStatusCardAniamte!(() {
+                    await widget.listUtil.reversetLoadMoreStatusCardAniamte!(
+                        () {
                       removeLoadMoreStatusCardOnFoot();
 
                       singleChildScrollViewItemTemp = PageTemp(
-                          pageWidgets: widgetsTemp,
-                          listUtil: widget.listUtil);
+                          pageWidgets: widgetsTemp, listUtil: widget.listUtil);
                       addSingleChildScrollViewItemOnFoot(
                           singleChildScrollViewItemTemp!); //添加Item
                       rebuildScrollCrtlLoadMoreBefore();
@@ -343,8 +345,7 @@ class _SwitchListState<T> extends State<SwitchList> {
                         //====维护卡片队列====
                         widget.listUtil
                             .getCurrentPageHeightInFunctionList!(pageHeight);
-                        widget.listUtil
-                            .maintainItemsInLoadMoreFunctionList!();
+                        widget.listUtil.maintainItemsInLoadMoreFunctionList!();
                         widget.listUtil
                             .maintainScrolllCtrlInLoadMoreInFunctionList!();
                         //这里有顺序，需要先计算和维护好item和scrollview后才把位置加入位置标记里
@@ -360,14 +361,13 @@ class _SwitchListState<T> extends State<SwitchList> {
                         .setStatus(Status.statusFootLoadFaild); //设置状态
                     singleChildScrollViewItemTemp = null; //
                     widgetsTemp = [];
-                    await widget
-                        .listUtil.reversetLoadMoreStatusCardAniamte!(() {
+                    await widget.listUtil.reversetLoadMoreStatusCardAniamte!(
+                        () {
                       removeLoadMoreStatusCardOnFoot();
                       rebuildScrollCrtlLoadMoreAfter();
                       setIsListView(true);
                       refreshUi();
                       widget.listUtil.setStatus(Status.statusIdel);
-                      
                     });
                   }
                 });
